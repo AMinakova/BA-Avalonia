@@ -1,0 +1,35 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:Todo.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:views="clr-namespace:Todo.Views"
+        mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="200"
+        Width="450" Height="500"
+        x:Class="Todo.Views.MainWindow"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="Todo"
+        >
+  <DockPanel>
+    <Menu DockPanel.Dock="Top">
+      <MenuItem Header="_File">
+        <MenuItem Header="_Open..." Command="{Binding Open}"/>
+        <Separator/>
+        <MenuItem Header="_Exit" Command="{Binding ExitApp}"/>
+      </MenuItem>
+      
+      <MenuItem Header="View">
+        <MenuItem Header="_FullScreen" Command="{Binding FullScreen}"/>
+        <Separator/>
+        <MenuItem Header="_SmallScreen" Command="{Binding SmallScreen}"/>
+      </MenuItem>
+    </Menu>
+    <ContentControl Content="{Binding Content}" />
+  </DockPanel>
+  <Window.Styles>
+    <Style Selector="TextBlock.h1">
+      <Setter Property="FontSize" Value="24"/>
+      <Setter Property="FontWeight" Value="Bold"/>
+    </Style>
+  </Window.Styles>
+</Window>
