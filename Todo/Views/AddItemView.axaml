@@ -18,7 +18,7 @@
     </Grid>-->
   <DockPanel>
     <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom"
-                HorizontalAlignment="Right" Margin="0,5" Spacing="10">
+                HorizontalAlignment="Right" Margin="0,5" Spacing="20">
       <Button Command="{Binding Ok}">OK</Button>
       <Button Command="{Binding Cancel}">Cancel</Button>
     </StackPanel>

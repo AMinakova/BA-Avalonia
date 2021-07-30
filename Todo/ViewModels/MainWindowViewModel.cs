@@ -19,8 +19,11 @@ namespace Todo.ViewModels
 
         public MainWindowViewModel(Database db)
         {
-            Content = List = new TodoListViewModel(db.GetItems());
-            Database = db;
+            //Content = List = new TodoListViewModel(db.GetItems());
+            Content = new WelcomeViewModel();
+            List = new TodoListViewModel(db.GetItems());
+
+            Database = new Database(); ;
         }
 
         public ViewModelBase Content
@@ -31,8 +34,10 @@ namespace Todo.ViewModels
 
         public TodoListViewModel List { get; }
 
+
         public void AddItem()
         {
+            Content = new TodoListViewModel(Database.GetItems());
             var vm = new AddItemViewModel(Database);
             Observable.Merge(
                 vm.Ok,

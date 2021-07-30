@@ -30,13 +30,13 @@ namespace Todo.Services
         }
 
         public TodoItem SaveItem(TodoItem item){
-            using (var writer = new StreamWriter(@"C:\Users\ganna.minakova\Desktop\BachelorArbeit\todo\todolist.csv", append: true))
-            {
-                var line = $"{item.Date};{item.Description};{item.IsChecked}";
-                writer.WriteLine(line);
-                writer.Flush();
-                writer.Close();
-            }
+        //    using (var writer = new StreamWriter(@"C:\Users\ganna.minakova\Desktop\BachelorArbeit\todo\todolist.csv", append: true))
+        //    {
+        //        var line = $"{item.Date};{item.Description};{item.IsChecked}";
+        //        writer.WriteLine(line);
+        //        writer.Flush();
+        //        writer.Close();
+        //    }
 
             return item;
         }
