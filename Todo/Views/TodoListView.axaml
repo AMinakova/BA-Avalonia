@@ -11,17 +11,14 @@
       <TextBlock Classes="h1" Text="Deine ToDo Liste" />
       <DataGrid Items="{Binding Items}" RowBackground="#ffffff">
           <DataGrid.Columns>
-          <DataGridCheckBoxColumn Header="Done"
-                              Binding="{Binding IsChecked}"
-                              Width="*" />
-          <DataGridTextColumn Header="Created"
-                              IsReadOnly="True"
-                              Binding="{Binding Date}"
-                              Width="2*" />
-          <DataGridTextColumn Header="Description"
-                              IsReadOnly="True"
-                              Binding="{Binding Description}"
-                              Width="2*" />
+              <DataGridTextColumn Header="Created"
+                                  IsReadOnly="True"
+                                  Binding="{Binding Date}"
+                                  Width="2*" />
+              <DataGridTextColumn Header="Description"
+                                  IsReadOnly="True"
+                                  Binding="{Binding Description}"
+                                  Width="2*" />
         </DataGrid.Columns>
       </DataGrid>
       <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" DockPanel.Dock="Bottom"

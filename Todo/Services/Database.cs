@@ -21,7 +21,6 @@ namespace Todo.Services
                     {
                         Date = values[0],
                         Description = values[1],
-                        IsChecked = bool.Parse(values[2])
                     };
                     toDo.Add(item);
                 }
