@@ -8,7 +8,7 @@
     <DockPanel Margin="5">
         <StackPanel>
             <TextBlock Classes="h1" Text="Deine ToDo Liste" />
-            <DataGrid Items="{Binding Items}" RowBackground="#ffffff">
+            <DataGrid Items="{Binding Items}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" RowBackground="#ffffff">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Created"
                                         IsReadOnly="True"
@@ -19,6 +19,11 @@
                                         Binding="{Binding Description}"
                                         Width="3*" />
                 </DataGrid.Columns>
+                <DataGrid.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Delete selected entry" Command="{Binding DeleteSelected}" />
+                    </ContextMenu>
+                </DataGrid.ContextMenu>
             </DataGrid>
             <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" DockPanel.Dock="Bottom"
                         Margin="0,5" Spacing="20">
