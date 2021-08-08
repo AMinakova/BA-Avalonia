@@ -16,15 +16,18 @@
           <Button Grid.Row="1" Grid.Column="0" Command="{Binding Ok}">OK</Button>
       </Grid>
     </Grid>-->
-  <DockPanel>
-    <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom"
-                HorizontalAlignment="Right" Margin="0,5" Spacing="20">
-      <Button Command="{Binding Ok}">OK</Button>
-      <Button Command="{Binding Cancel}">Cancel</Button>
-    </StackPanel>
+
+  <StackPanel Margin="50" VerticalAlignment="Center" >
+    <TextBlock Classes="h1" Text="ToDo hinzufügen:" />
     <TextBox AcceptsReturn="False"
              Text="{Binding Description}"
              Watermark="Enter your TODO"
                  />
-  </DockPanel>
+    <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom"
+                    HorizontalAlignment="Right" Margin="0,5" Spacing="20">
+      <Button Background="Blue" Foreground="White" Command="{Binding Ok}">Speichern</Button>
+      <Button Command="{Binding Cancel}">Abbrechen</Button>
+    </StackPanel>
+
+  </StackPanel>
 </UserControl>

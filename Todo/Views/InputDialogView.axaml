@@ -1,0 +1,18 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="Todo.Views.InputDialogView"
+        Title="Bennen deine Liste!">
+
+  <StackPanel Margin="20" VerticalAlignment="Center" HorizontalAlignment="Center">
+    <TextBlock Text="Tipp Name von deiner Liste:"
+               Padding="20"
+               />
+    <TextBox AcceptsReturn="False"
+         Text="{Binding ListName}"
+                 />
+    <Button Background="Blue" Margin="1" Foreground="White" Command="{Binding Save}" HorizontalAlignment="Center">Speichern</Button>
+  </StackPanel>
+</Window>

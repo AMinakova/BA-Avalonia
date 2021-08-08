@@ -1,14 +1,11 @@
 using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
-using System.Threading.Tasks;
-
 namespace Todo.Views
 {
-    public partial class MainWindow : Window
+    public partial class InputDialogView : Window
     {
-        public MainWindow()
+        public InputDialogView()
         {
             InitializeComponent();
 #if DEBUG
@@ -20,7 +17,5 @@ namespace Todo.Views
         {
             AvaloniaXamlLoader.Load(this);
         }
-
-
     }
 }

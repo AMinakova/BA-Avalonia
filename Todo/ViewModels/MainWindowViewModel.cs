@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Todo.Models;
 using Todo.Services;
+using Todo.Views;
 
 namespace Todo.ViewModels
 {
@@ -16,13 +17,20 @@ namespace Todo.ViewModels
     {
         ViewModelBase content;
         Database Database;
-
+        InputDialogView Dialog;
         public MainWindowViewModel(Database db)
         {
             //Content = List = new TodoListViewModel(db.GetItems());
             Content = new WelcomeViewModel();
             List = new TodoListViewModel(db.GetItems());
-
+            Dialog = new InputDialogView
+            {
+                DataContext = new InputDialogViewModel(),
+                MinWidth = 250,
+                Height = 220,
+                MinHeight = 200,
+                SizeToContent = SizeToContent.Width,
+            };
             Database = new Database(); ;
         }
 
@@ -33,7 +41,6 @@ namespace Todo.ViewModels
         }
 
         public TodoListViewModel List { get; }
-
 
         public void AddItem()
         {
@@ -56,10 +63,26 @@ namespace Todo.ViewModels
             Content = vm;
         }
 
-        public void ExitApp() { Environment.Exit(0); }
+        public void ExitApp() { 
+            Environment.Exit(0); 
+        }
+
+
         public async Task Open()
         {
-            var dialog = new OpenFileDialog();
+             List < FileDialogFilter > filters = new List<FileDialogFilter>
+             {
+                    new FileDialogFilter
+                    {
+                        Name = ".csv Files", Extensions = new List<string> {"csv"}
+                    },
+               };
+            var dialog = new OpenFileDialog()
+            {
+                Title = "Öffnen Sie .csv Datei",
+                Filters = filters
+            };
+
             IClassicDesktopStyleApplicationLifetime desktop = (IClassicDesktopStyleApplicationLifetime)Application.Current.ApplicationLifetime;
             var result = await dialog.ShowAsync(desktop.MainWindow);
             
@@ -73,6 +96,26 @@ namespace Todo.ViewModels
                 }
             }
         }
+
+        public async Task Save()
+        {
+            var dialog = new SaveFileDialog();
+            IClassicDesktopStyleApplicationLifetime desktop = (IClassicDesktopStyleApplicationLifetime)Application.Current.ApplicationLifetime;
+            await dialog.ShowAsync(desktop.MainWindow);
+
+        }
+
+        public async Task ShowDialog()
+        {
+            IClassicDesktopStyleApplicationLifetime desktop = (IClassicDesktopStyleApplicationLifetime)Application.Current.ApplicationLifetime;
+            await Dialog.ShowDialog(desktop.MainWindow);
+        }
+
+        public async Task CloseDialog()
+        {
+            Dialog.Close();
+        }
+
 
         public void FullScreen()
         {

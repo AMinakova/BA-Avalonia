@@ -7,11 +7,8 @@
              x:Class="Todo.Views.TodoListView">
 
   <DockPanel>
-    <Button DockPanel.Dock="Top"
-            Command="{Binding $parent[Window].DataContext.AddItem}">
-      Add an item
-    </Button>
     <StackPanel>
+      <TextBlock Classes="h1" Text="Deine ToDo Liste" />
       <DataGrid Items="{Binding Items}" RowBackground="#ffffff">
           <DataGrid.Columns>
           <DataGridCheckBoxColumn Header="Done"
@@ -27,6 +24,16 @@
                               Width="2*" />
         </DataGrid.Columns>
       </DataGrid>
+      <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" DockPanel.Dock="Bottom"
+       Margin="0,5" Spacing="20">
+
+        <Button Command="{Binding $parent[Window].DataContext.ShowDialog}">Liste speichern</Button>
+        <Button Command="{Binding $parent[Window].DataContext.AddItem}">ToDo hinzufügen</Button>
+        <Popup Name="popupWithOffset" HorizontalOffset="300" Width ="250" Height="100">
+          <TextBlock Text="Popup with offset"/>
+        </Popup>
+      </StackPanel>
     </StackPanel>
+
    </DockPanel>
 </UserControl>
