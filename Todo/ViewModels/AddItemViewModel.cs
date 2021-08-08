@@ -6,7 +6,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Todo.Models;
-using Todo.Services;
 
 namespace Todo.ViewModels
 {
@@ -14,24 +13,26 @@ namespace Todo.ViewModels
     {
         string description;
 
-        public AddItemViewModel(Database db)
+        public AddItemViewModel()
         {
             var okEnabled = this.WhenAnyValue(
                 x => x.Description,
                 x => !string.IsNullOrWhiteSpace(x));
 
             Ok = ReactiveCommand.Create(
-                () => db.SaveItem(new TodoItem {
+                () => new TodoItem {
                     Description = Description,
-                    Date = DateTime.Now.Date.ToString()
-                }),
+                    Date = DateTime.Now.Date,
+                },
                 okEnabled);
             Cancel = ReactiveCommand.Create(() => { });
         }
-        public string Description { 
-            get => description; 
+
+        public string Description {
+            get => description;
             set => this.RaiseAndSetIfChanged(ref description, value);
         }
+
         public ReactiveCommand<Unit, TodoItem> Ok { get; }
         public ReactiveCommand<Unit, Unit> Cancel { get; }
     }

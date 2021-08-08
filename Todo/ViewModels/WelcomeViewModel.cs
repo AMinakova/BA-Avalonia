@@ -8,6 +8,5 @@ namespace Todo.ViewModels
 {
     class WelcomeViewModel : ViewModelBase
     {
-
     }
 }

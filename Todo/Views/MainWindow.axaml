@@ -10,31 +10,32 @@
         Icon="/Assets/avalonia-logo.ico"
         Title="Todo"
         >
-  <DockPanel>
-    <Menu DockPanel.Dock="Top">
-      <MenuItem Header="_File">
-        <MenuItem Header="_Open..." Command="{Binding Open}"/>
-        <Separator/>
-        <MenuItem Header="_Exit" Command="{Binding ExitApp}"/>
-      </MenuItem>
-      
-      <MenuItem Header="View">
-        <MenuItem Header="_FullScreen" Command="{Binding FullScreen}"/>
-        <Separator/>
-        <MenuItem Header="_SmallScreen" Command="{Binding SmallScreen}"/>
-      </MenuItem>
-    </Menu>
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="_File">
+                <MenuItem Header="_Open..." Command="{Binding Open}"/>
+                <Separator/>
+                <MenuItem Header="_Exit" Command="{Binding ExitApp}"/>
+            </MenuItem>
 
-    <ContentControl Content="{Binding Content}" />
-  </DockPanel>
-  <Window.Styles>
-    <Style Selector="TextBlock.h1">
-      <Setter Property="FontSize" Value="24"/>
-      <Setter Property="FontWeight" Value="Bold"/>
-      <Setter Property="HorizontalAlignment" Value="Center"/>
-    </Style>
-    <Style Selector="TextBlock">
-      <Setter Property="FontSize" Value="14"/>
-    </Style>
-  </Window.Styles>
+            <MenuItem Header="View">
+                <MenuItem Header="_FullScreen" Command="{Binding FullScreen}"/>
+                <Separator/>
+                <MenuItem Header="_SmallScreen" Command="{Binding SmallScreen}"/>
+            </MenuItem>
+        </Menu>
+
+        <ContentControl Content="{Binding Content}" />
+    </DockPanel>
+
+    <Window.Styles>
+        <Style Selector="TextBlock.h1">
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
+        <Style Selector="TextBlock">
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+    </Window.Styles>
 </Window>

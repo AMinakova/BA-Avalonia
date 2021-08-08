@@ -1,7 +1,6 @@
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
-using Todo.Services;
 using Todo.ViewModels;
 using Todo.Views;
 
@@ -18,10 +17,9 @@ namespace Todo
         {
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
-                var db = new Database();
                 desktop.MainWindow = new MainWindow
                 {
-                    DataContext = new MainWindowViewModel(db),
+                    DataContext = new MainWindowViewModel(),
                 };
             }
 

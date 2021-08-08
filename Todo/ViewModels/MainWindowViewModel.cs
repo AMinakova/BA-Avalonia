@@ -7,22 +7,20 @@ using System.Collections.Generic;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
 using Todo.Models;
-using Todo.Services;
 using Todo.Views;
 
 namespace Todo.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
-        ViewModelBase content;
-        Database Database;
-        InputDialogView Dialog;
-        public MainWindowViewModel(Database db)
+        protected ViewModelBase content;
+        protected InputDialogView dialog;
+
+        public MainWindowViewModel()
         {
-            //Content = List = new TodoListViewModel(db.GetItems());
             Content = new WelcomeViewModel();
-            List = new TodoListViewModel(db.GetItems());
-            Dialog = new InputDialogView
+            List = new TodoListViewModel();
+            dialog = new InputDialogView
             {
                 DataContext = new InputDialogViewModel(),
                 MinWidth = 250,
@@ -30,7 +28,6 @@ namespace Todo.ViewModels
                 MinHeight = 200,
                 SizeToContent = SizeToContent.Width,
             };
-            Database = new Database(); ;
         }
 
         public ViewModelBase Content
@@ -43,8 +40,7 @@ namespace Todo.ViewModels
 
         public void AddItem()
         {
-            Content = new TodoListViewModel(Database.GetItems());
-            var vm = new AddItemViewModel(Database);
+            var vm = new AddItemViewModel();
             Observable.Merge(
                 vm.Ok,
                 vm.Cancel.Select(_ => (TodoItem)null))
@@ -107,12 +103,12 @@ namespace Todo.ViewModels
         public async Task ShowDialog()
         {
             IClassicDesktopStyleApplicationLifetime desktop = (IClassicDesktopStyleApplicationLifetime)Application.Current.ApplicationLifetime;
-            await Dialog.ShowDialog(desktop.MainWindow);
+            await dialog.ShowDialog(desktop.MainWindow);
         }
 
         public void CloseDialog()
         {
-            Dialog.Close();
+            dialog.Close();
         }
 
         public void FullScreen()
