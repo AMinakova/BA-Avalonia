@@ -13,15 +13,15 @@
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_File">
-                <MenuItem Header="_Open..." Command="{Binding OpenFile}"/>
+                <MenuItem Header="_Open..." Command="{Binding OpenFile}" InputGesture="Ctrl+O" HotKey="Ctrl+O" />
                 <Separator/>
-                <MenuItem Header="_Exit" Command="{Binding ExitApp}"/>
+                <MenuItem Header="_Exit" Command="{Binding ExitApp}" InputGesture="Ctrl+Q" HotKey="Ctrl+Q" />
             </MenuItem>
 
             <MenuItem Header="View">
-                <MenuItem Header="_FullScreen" Command="{Binding FullScreen}"/>
+                <MenuItem Header="_FullScreen" Command="{Binding FullScreen}" InputGesture="F11" HotKey="F11" />
                 <Separator/>
-                <MenuItem Header="_SmallScreen" Command="{Binding SmallScreen}"/>
+                <MenuItem Header="_SmallScreen" Command="{Binding SmallScreen}" InputGesture="Shift+F11" HotKey="Shift+F11" />
             </MenuItem>
         </Menu>
 

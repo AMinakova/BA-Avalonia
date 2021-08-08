@@ -11,6 +11,12 @@ namespace Todo.Views
 #if DEBUG
             this.AttachDevTools();
 #endif
+
+            var firstInput = this.FindControl<TextBox>("ListNameInput");
+            if (firstInput != null)
+            {
+                firstInput.AttachedToVisualTree += (s, e) => firstInput.Focus();
+            }
         }
 
         private void InitializeComponent()

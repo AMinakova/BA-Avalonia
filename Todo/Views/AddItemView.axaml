@@ -17,17 +17,18 @@
       </Grid>
     </Grid>-->
 
-  <StackPanel Margin="50" VerticalAlignment="Center" >
-    <TextBlock Classes="h1" Text="ToDo hinzufügen:" />
-    <TextBox AcceptsReturn="False"
-             Text="{Binding Description}"
-             Watermark="Enter your TODO"
+    <StackPanel Margin="50" VerticalAlignment="Center">
+        <TextBlock Classes="h1" Text="ToDo hinzufügen:" />
+        <TextBox AcceptsReturn="False"
+                 Name="TodoDescriptionInput"
+                 Text="{Binding Description}"
+                 Watermark="Enter your TODO"
                  />
-    <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom"
+        <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom"
                     HorizontalAlignment="Right" Margin="0,5" Spacing="20">
-      <Button Background="Blue" Foreground="White" Command="{Binding Ok}">Speichern</Button>
-      <Button Command="{Binding Cancel}">Abbrechen</Button>
-    </StackPanel>
+            <Button Background="Blue" Foreground="White" Command="{Binding Ok}" IsDefault="True">Speichern</Button>
+            <Button Command="{Binding Cancel}" IsCancel="True">Abbrechen</Button>
+        </StackPanel>
 
-  </StackPanel>
+    </StackPanel>
 </UserControl>

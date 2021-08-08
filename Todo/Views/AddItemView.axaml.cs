@@ -9,6 +9,12 @@ namespace Todo.Views
         public AddItemView()
         {
             InitializeComponent();
+
+            var firstInput = this.FindControl<TextBox>("TodoDescriptionInput");
+            if (firstInput != null)
+            {
+                firstInput.AttachedToVisualTree += (s, e) => firstInput.Focus();
+            }
         }
 
         private void InitializeComponent()
