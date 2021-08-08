@@ -30,9 +30,6 @@
 
                 <Button Command="{Binding $parent[Window].DataContext.ShowDialog}" HotKey="Ctrl+S">Liste speichern</Button>
                 <Button Command="{Binding $parent[Window].DataContext.AddItem}">ToDo hinzufügen</Button>
-                <Popup Name="popupWithOffset" HorizontalOffset="300" Width ="250" Height="100">
-                    <TextBlock Text="Popup with offset"/>
-                </Popup>
             </StackPanel>
         </StackPanel>
 

@@ -56,6 +56,16 @@ namespace Todo.ViewModels
 
         public TodoListViewModel List { get; }
 
+        public Window AppMainWindow => ((IClassicDesktopStyleApplicationLifetime)Application.Current.ApplicationLifetime).MainWindow;
+
+        protected List<FileDialogFilter> DialogFileFilters => new List<FileDialogFilter>
+        {
+            new FileDialogFilter
+            {
+                Name = ".csv Files", Extensions = new List<string> {"csv"}
+            },
+        };
+
         public void AddItem()
         {
             var vm = new AddItemViewModel();
@@ -122,16 +132,6 @@ namespace Todo.ViewModels
                 fileStorage.Save(path, List.Items);
             }
         }
-
-        public Window AppMainWindow => ((IClassicDesktopStyleApplicationLifetime)Application.Current.ApplicationLifetime).MainWindow;
-
-        protected List<FileDialogFilter> DialogFileFilters => new List<FileDialogFilter>
-        {
-            new FileDialogFilter
-            {
-                Name = ".csv Files", Extensions = new List<string> {"csv"}
-            },
-        };
 
         public void ShowDialog()
         {
