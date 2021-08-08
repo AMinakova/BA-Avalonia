@@ -5,7 +5,6 @@ using ReactiveUI;
 using System;
 using System.Collections.Generic;
 using System.Reactive.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Todo.Models;
 using Todo.Services;
@@ -63,20 +62,20 @@ namespace Todo.ViewModels
             Content = vm;
         }
 
-        public void ExitApp() { 
-            Environment.Exit(0); 
+        public void ExitApp()
+        {
+            Environment.Exit(0);
         }
-
 
         public async Task Open()
         {
-             List < FileDialogFilter > filters = new List<FileDialogFilter>
-             {
-                    new FileDialogFilter
-                    {
-                        Name = ".csv Files", Extensions = new List<string> {"csv"}
-                    },
-               };
+            List<FileDialogFilter> filters = new List<FileDialogFilter>
+            {
+                new FileDialogFilter
+                {
+                    Name = ".csv Files", Extensions = new List<string> {"csv"}
+                },
+            };
             var dialog = new OpenFileDialog()
             {
                 Title = "Öffnen Sie .csv Datei",
@@ -85,7 +84,7 @@ namespace Todo.ViewModels
 
             IClassicDesktopStyleApplicationLifetime desktop = (IClassicDesktopStyleApplicationLifetime)Application.Current.ApplicationLifetime;
             var result = await dialog.ShowAsync(desktop.MainWindow);
-            
+
 
             if (result != null)
             {
@@ -111,17 +110,17 @@ namespace Todo.ViewModels
             await Dialog.ShowDialog(desktop.MainWindow);
         }
 
-        public async Task CloseDialog()
+        public void CloseDialog()
         {
             Dialog.Close();
         }
-
 
         public void FullScreen()
         {
             IClassicDesktopStyleApplicationLifetime desktop = (IClassicDesktopStyleApplicationLifetime)Application.Current.ApplicationLifetime;
             desktop.MainWindow.WindowState = WindowState.FullScreen;
         }
+
         public void SmallScreen()
         {
             IClassicDesktopStyleApplicationLifetime desktop = (IClassicDesktopStyleApplicationLifetime)Application.Current.ApplicationLifetime;
