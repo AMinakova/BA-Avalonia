@@ -94,13 +94,14 @@ namespace Todo.ViewModels
 
             if (result != null && result.Length != 0)
             {
+                // bug workaround: avalonia doesn't rerender lists correctly if many items added at once
+                Content = null;
                 string path = result[0];
                 var loaded = fileStorage.Load(path);
-                List.SetItems(loaded);
                 TodoListName = System.IO.Path.GetFileNameWithoutExtension(path);
+                List.SetItems(loaded);
+                Content = List;
             }
-
-            Content = List;
         }
 
         public async Task SaveFile(string listName)
