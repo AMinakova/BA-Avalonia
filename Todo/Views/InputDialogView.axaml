@@ -3,13 +3,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-        x:Name="InputDialogWindow"
         x:Class="Todo.Views.InputDialogView"
         Title="Bennen deine Liste!">
 
     <StackPanel Margin="20" VerticalAlignment="Center" HorizontalAlignment="Center">
         <TextBlock Text="Tipp Name von deiner Liste:" Padding="20" />
         <TextBox AcceptsReturn="False" Text="{Binding ListName}" />
-        <Button Background="Blue" Margin="1" Foreground="White" Command="{Binding Save}" CommandParameter="{Binding ElementName=InputDialogWindow}" HorizontalAlignment="Center">Speichern</Button>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="2" Spacing="3">
+            <Button Background="Blue" Margin="1" Foreground="White" Command="{Binding Save}">Speichern</Button>
+            <Button Command="{Binding Close}">Cancel</Button>
+        </StackPanel>
     </StackPanel>
 </Window>

@@ -1,11 +1,6 @@
-﻿using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Controls.ApplicationLifetimes;
-using ReactiveUI;
-using System.Collections.Generic;
-using System.Reactive;
+﻿using ReactiveUI;
+using System;
 using System.Threading.Tasks;
-//using System.Windows.Input;
 
 namespace Todo.ViewModels
 {
@@ -18,17 +13,13 @@ namespace Todo.ViewModels
             set => this.RaiseAndSetIfChanged(ref listName, value);
         }
 
-        public async Task Save(Window dialogWindow)
+        public Action Close { get; set; }
+        public Func<string, Task> Saver { get; set; }
+
+        public async Task Save()
         {
-            var desktop = (IClassicDesktopStyleApplicationLifetime)Application.Current.ApplicationLifetime;
-            MainWindowViewModel mainVM = (MainWindowViewModel)desktop.MainWindow.DataContext;
-
-            await mainVM.SaveFile(ListName);
-
-            if (dialogWindow != null)
-            {
-                dialogWindow.Close();
-            }
+            await Saver?.Invoke(ListName);
+            Close?.Invoke();
         }
     }
 }

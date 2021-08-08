@@ -20,7 +20,7 @@ namespace Todo
             {
                 desktop.MainWindow = new MainWindow
                 {
-                    DataContext = new MainWindowViewModel(new CsvFileStorage()),
+                    DataContext = new MainWindowViewModel(new FileStorage()),
                 };
             }
 

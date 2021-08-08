@@ -17,9 +17,9 @@ namespace Todo.ViewModels
         protected const string TitleApp = "Todo";
 
         protected ViewModelBase content;
-        protected IFileStorage fileStorage;
+        protected FileStorage fileStorage;
 
-        public MainWindowViewModel(IFileStorage storage)
+        public MainWindowViewModel(FileStorage storage)
         {
             fileStorage = storage;
 
@@ -136,12 +136,18 @@ namespace Todo.ViewModels
         {
             InputDialogView promptDialog = new InputDialogView
             {
-                DataContext = new InputDialogViewModel { ListName = TodoListName },
                 MinWidth = 250,
                 Height = 220,
                 MinHeight = 200,
                 SizeToContent = SizeToContent.Width,
             };
+            promptDialog.DataContext = new InputDialogViewModel
+            {
+                ListName = TodoListName,
+                Close = promptDialog.Close,
+                Saver = SaveFile,
+            };
+
             promptDialog.ShowDialog(AppMainWindow);
         }
 
