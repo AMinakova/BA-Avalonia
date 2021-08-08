@@ -7,27 +7,45 @@ using System.Collections.Generic;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
 using Todo.Models;
+using Todo.Services;
 using Todo.Views;
 
 namespace Todo.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
-        protected ViewModelBase content;
-        protected InputDialogView dialog;
+        protected const string TitleApp = "Todo";
 
-        public MainWindowViewModel()
+        protected ViewModelBase content;
+        protected IFileStorage fileStorage;
+
+        public MainWindowViewModel(IFileStorage storage)
         {
+            fileStorage = storage;
+
             Content = new WelcomeViewModel();
             List = new TodoListViewModel();
-            dialog = new InputDialogView
+        }
+
+        private string todoListName;
+        protected string TodoListName
+        {
+            get => todoListName;
+            set
             {
-                DataContext = new InputDialogViewModel(),
-                MinWidth = 250,
-                Height = 220,
-                MinHeight = 200,
-                SizeToContent = SizeToContent.Width,
-            };
+                if (!string.IsNullOrEmpty(value))
+                {
+                    WinTitle = $"{TitleApp} : {value}";
+                    todoListName = value;
+                }
+            }
+        }
+
+        private string winTitle = TitleApp;
+        public string WinTitle
+        {
+            get => winTitle;
+            set => this.RaiseAndSetIfChanged(ref winTitle, value);
         }
 
         public ViewModelBase Content
@@ -63,64 +81,78 @@ namespace Todo.ViewModels
             Environment.Exit(0);
         }
 
-        public async Task Open()
+        public async Task OpenFile()
         {
-            List<FileDialogFilter> filters = new List<FileDialogFilter>
-            {
-                new FileDialogFilter
-                {
-                    Name = ".csv Files", Extensions = new List<string> {"csv"}
-                },
-            };
             var dialog = new OpenFileDialog()
             {
                 Title = "Öffnen Sie .csv Datei",
-                Filters = filters
+                Filters = DialogFileFilters,
+                InitialFileName = TodoListName,
             };
 
-            IClassicDesktopStyleApplicationLifetime desktop = (IClassicDesktopStyleApplicationLifetime)Application.Current.ApplicationLifetime;
-            var result = await dialog.ShowAsync(desktop.MainWindow);
+            var result = await dialog.ShowAsync(AppMainWindow);
 
-
-            if (result != null)
+            if (result != null && result.Length != 0)
             {
-                foreach (var path in result)
-                {
-                    System.Diagnostics.Debug.WriteLine($"Opened: {path}");
-                    System.Diagnostics.Debug.WriteLine($"Opened: {result}");
-                }
+                string path = result[0];
+                var loaded = fileStorage.Load(path);
+                List.SetItems(loaded);
+                TodoListName = System.IO.Path.GetFileNameWithoutExtension(path);
+            }
+
+            Content = List;
+        }
+
+        public async Task SaveFile(string listName)
+        {
+            TodoListName = listName;
+
+            var dialog = new SaveFileDialog()
+            {
+                Title = "Speícher .csv Datei",
+                Filters = DialogFileFilters,
+                InitialFileName = TodoListName,
+            };
+
+            var path = await dialog.ShowAsync(AppMainWindow);
+
+            if (!string.IsNullOrEmpty(path))
+            {
+                fileStorage.Save(path, List.Items);
             }
         }
 
-        public async Task Save()
-        {
-            var dialog = new SaveFileDialog();
-            IClassicDesktopStyleApplicationLifetime desktop = (IClassicDesktopStyleApplicationLifetime)Application.Current.ApplicationLifetime;
-            await dialog.ShowAsync(desktop.MainWindow);
+        public Window AppMainWindow => ((IClassicDesktopStyleApplicationLifetime)Application.Current.ApplicationLifetime).MainWindow;
 
-        }
-
-        public async Task ShowDialog()
+        protected List<FileDialogFilter> DialogFileFilters => new List<FileDialogFilter>
         {
-            IClassicDesktopStyleApplicationLifetime desktop = (IClassicDesktopStyleApplicationLifetime)Application.Current.ApplicationLifetime;
-            await dialog.ShowDialog(desktop.MainWindow);
-        }
+            new FileDialogFilter
+            {
+                Name = ".csv Files", Extensions = new List<string> {"csv"}
+            },
+        };
 
-        public void CloseDialog()
+        public void ShowDialog()
         {
-            dialog.Close();
+            InputDialogView promptDialog = new InputDialogView
+            {
+                DataContext = new InputDialogViewModel { ListName = TodoListName },
+                MinWidth = 250,
+                Height = 220,
+                MinHeight = 200,
+                SizeToContent = SizeToContent.Width,
+            };
+            promptDialog.ShowDialog(AppMainWindow);
         }
 
         public void FullScreen()
         {
-            IClassicDesktopStyleApplicationLifetime desktop = (IClassicDesktopStyleApplicationLifetime)Application.Current.ApplicationLifetime;
-            desktop.MainWindow.WindowState = WindowState.FullScreen;
+            AppMainWindow.WindowState = WindowState.FullScreen;
         }
 
         public void SmallScreen()
         {
-            IClassicDesktopStyleApplicationLifetime desktop = (IClassicDesktopStyleApplicationLifetime)Application.Current.ApplicationLifetime;
-            desktop.MainWindow.WindowState = WindowState.Normal;
+            AppMainWindow.WindowState = WindowState.Normal;
         }
     }
 }

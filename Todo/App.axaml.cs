@@ -1,6 +1,7 @@
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
+using Todo.Services;
 using Todo.ViewModels;
 using Todo.Views;
 
@@ -19,7 +20,7 @@ namespace Todo
             {
                 desktop.MainWindow = new MainWindow
                 {
-                    DataContext = new MainWindowViewModel(),
+                    DataContext = new MainWindowViewModel(new CsvFileStorage()),
                 };
             }
 

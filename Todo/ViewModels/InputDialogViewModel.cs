@@ -12,32 +12,23 @@ namespace Todo.ViewModels
     class InputDialogViewModel : ViewModelBase
     {
         string listName;
-
         public string ListName
         {
             get => listName;
             set => this.RaiseAndSetIfChanged(ref listName, value);
-
         }
 
-        public async Task Save()
+        public async Task Save(Window dialogWindow)
         {
-            List<FileDialogFilter> filters = new List<FileDialogFilter>
-            {
-                new FileDialogFilter
-                {
-                    Name = ".csv Files", Extensions = new List<string> {"csv"}
-                },
-            };
+            var desktop = (IClassicDesktopStyleApplicationLifetime)Application.Current.ApplicationLifetime;
+            MainWindowViewModel mainVM = (MainWindowViewModel)desktop.MainWindow.DataContext;
 
-            var dialog = new SaveFileDialog()
+            await mainVM.SaveFile(ListName);
+
+            if (dialogWindow != null)
             {
-                Title = "Speícher .csv Datei",
-                Filters = filters,
-                InitialFileName = ListName
-            };
-            IClassicDesktopStyleApplicationLifetime desktop = (IClassicDesktopStyleApplicationLifetime)Application.Current.ApplicationLifetime;
-            await dialog.ShowAsync(desktop.MainWindow);
+                dialogWindow.Close();
+            }
         }
     }
 }

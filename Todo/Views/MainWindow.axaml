@@ -8,12 +8,12 @@
         Width="650" Height="450"
         x:Class="Todo.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
-        Title="Todo"
+        Title="{Binding WinTitle}"
         >
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_File">
-                <MenuItem Header="_Open..." Command="{Binding Open}"/>
+                <MenuItem Header="_Open..." Command="{Binding OpenFile}"/>
                 <Separator/>
                 <MenuItem Header="_Exit" Command="{Binding ExitApp}"/>
             </MenuItem>
