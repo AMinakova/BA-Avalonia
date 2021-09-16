@@ -2,33 +2,35 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="200"
+             mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="200"
              x:Class="Todo.Views.TodoListView">
 
     <DockPanel Margin="5">
         <StackPanel>
             <TextBlock Classes="h1" Text="Deine ToDo Liste" />
-            <DataGrid Items="{Binding Items}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" RowBackground="#ffffff">
+            <DataGrid Name="TodoGrid" Items="{Binding Items}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" HeadersVisibility="All" RowBackground="#ffffff">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Created"
+                    <DataGridTextColumn Header="Datum"
                                         IsReadOnly="True"
                                         Binding="{Binding Date, StringFormat=\{0:dd.MM.yyyy\}}"
                                         Width="1*" />
-                    <DataGridTextColumn Header="Description"
+                    <DataGridTextColumn Header="Aufgabe"
                                         IsReadOnly="True"
                                         Binding="{Binding Description}"
                                         Width="3*" />
                 </DataGrid.Columns>
                 <DataGrid.ContextMenu>
                     <ContextMenu>
-                        <MenuItem Header="Delete selected entry" Command="{Binding DeleteSelected}" />
+                        <MenuItem Header="Hier ist das Todo Kontext-Menu:" />
+                        <Separator/>
+                        <MenuItem Header="Das Todo löschen" Command="{Binding DeleteSelected}" />
                     </ContextMenu>
                 </DataGrid.ContextMenu>
             </DataGrid>
             <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" DockPanel.Dock="Bottom"
                         Margin="0,5" Spacing="20">
 
-                <Button Command="{Binding $parent[Window].DataContext.ShowDialog}" HotKey="Ctrl+S">Liste speichern</Button>
+                <Button Command="{Binding $parent[Window].DataContext.ShowDialog}" HotKey="Ctrl+S" Background="RoyalBlue" Foreground="White">Liste speichern</Button>
                 <Button Command="{Binding $parent[Window].DataContext.AddItem}">ToDo hinzufügen</Button>
             </StackPanel>
         </StackPanel>

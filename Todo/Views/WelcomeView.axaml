@@ -11,7 +11,7 @@
                    TextWrapping="Wrap"/>
         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" DockPanel.Dock="Bottom"
                    Margin="0,5" Spacing="20">
-            <Button Command="{Binding $parent[Window].DataContext.OpenFile}">Datei öffnen</Button>
+            <Button Command="{Binding $parent[Window].DataContext.OpenFile}" Background="RoyalBlue" Foreground="White">Datei öffnen</Button>
             <Button Command="{Binding $parent[Window].DataContext.AddItem}">Liste erstellen</Button>
         </StackPanel>
 

@@ -10,7 +10,7 @@
         <TextBlock Text="Tipp Name von deiner Liste:" Padding="20" />
         <TextBox Name="ListNameInput" AcceptsReturn="False" Text="{Binding ListName}" />
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="2" Spacing="3">
-            <Button Background="Blue" Margin="1" Foreground="White" Command="{Binding Save}" IsDefault="True">Speichern</Button>
+            <Button Background="RoyalBlue" Margin="1" Foreground="White" Command="{Binding Save}" IsDefault="True">Speichern</Button>
             <Button Command="{Binding Close}" IsCancel="True">Cancel</Button>
         </StackPanel>
     </StackPanel>

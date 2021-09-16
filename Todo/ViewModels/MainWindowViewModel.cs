@@ -137,7 +137,7 @@ namespace Todo.ViewModels
         {
             InputDialogView promptDialog = new InputDialogView
             {
-                MinWidth = 250,
+                MinWidth = 400,
                 Height = 220,
                 MinHeight = 200,
                 SizeToContent = SizeToContent.Width,
